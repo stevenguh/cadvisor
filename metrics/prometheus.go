@@ -542,6 +542,22 @@ func NewPrometheusCollector(i infoProvider, f ContainerLabelsFunc, includedMetri
 					}
 					return values
 				},
+			}, {
+				name:        "container_accelerator_power_usage",
+				help:        "Power usage for this accelerator in milliwatts.",
+				valueType:   prometheus.GaugeValue,
+				extraLabels: []string{"make", "model", "acc_id"},
+				getValues: func(s *info.ContainerStats) metricValues {
+					values := make(metricValues, 0, len(s.Accelerators))
+					for _, value := range s.Accelerators {
+						values = append(values, metricValue{
+							value:     float64(value.PowerUsage),
+							labels:    []string{value.Make, value.Model, value.ID},
+							timestamp: s.Timestamp,
+						})
+					}
+					return values
+				},
 			},
 		}...)
 	}

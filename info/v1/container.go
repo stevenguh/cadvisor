@@ -834,6 +834,10 @@ type AcceleratorStats struct {
 	// Percent of time over the past sample period during which
 	// the accelerator was actively processing.
 	DutyCycle uint64 `json:"duty_cycle"`
+
+	// Power usage for this GPU and its associated circuitry.
+	// unit: milliwatts
+	PowerUsage uint64 `json:"power_usage"`
 }
 
 // PerfStat represents value of a single monitored perf event.

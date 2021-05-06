@@ -585,6 +585,7 @@ func (p testSubcontainersInfoProvider) GetRequestedContainersInfo(string, v2.Req
 							MemoryTotal: 20304050607,
 							MemoryUsed:  2030405060,
 							DutyCycle:   12,
+							PowerUsage:  13,
 						},
 						{
 							Make:        "nvidia",
@@ -593,6 +594,7 @@ func (p testSubcontainersInfoProvider) GetRequestedContainersInfo(string, v2.Req
 							MemoryTotal: 10203040506,
 							MemoryUsed:  1020304050,
 							DutyCycle:   6,
+							PowerUsage:  21,
 						},
 					},
 					Processes: info.ProcessStats{

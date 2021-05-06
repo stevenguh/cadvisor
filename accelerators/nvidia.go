@@ -262,6 +262,11 @@ func (nc *nvidiaCollector) UpdateStats(stats *info.ContainerStats) error {
 			return fmt.Errorf("error while getting gpu utilization: %v", err)
 		}
 
+		powerGPU, err := device.PowerUsage()
+		if err != nil {
+			return fmt.Errorf("error while getting gpu power usage: %v", err)
+		}
+
 		stats.Accelerators = append(stats.Accelerators, info.AcceleratorStats{
 			Make:        "nvidia",
 			Model:       model,
@@ -269,6 +274,7 @@ func (nc *nvidiaCollector) UpdateStats(stats *info.ContainerStats) error {
 			MemoryTotal: memoryTotal,
 			MemoryUsed:  memoryUsed,
 			DutyCycle:   uint64(utilizationGPU),
+			PowerUsage:  uint64(powerGPU),
 		})
 	}
 	return nil
